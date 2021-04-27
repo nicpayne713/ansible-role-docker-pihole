@@ -5,18 +5,18 @@ docker_pihole_image_name: pihole/pihole:latest
 
 docker_pihole_network: bridge
 docker_pihole_network_interface: "eth0"
-docker_pihole_ipv4_address: 192.168.1.100
-docker_pihole_purge_networks: yes
+# docker_pihole_ipv4_address: 192.168.1.100
+# docker_pihole_purge_networks: yes
 
 docker_pihole_admin_password:
-
+docker_pihole_web_port: 8080
 docker_pihole_host_dir_dnsmasqd: /etc/dnsmasq.d/
 docker_pihole_host_dir_pihole: /etc/pihole/
 docker_pihole_volumes:
   - "{{ docker_pihole_host_dir_pihole }}:/etc/pihole/"
   - "{{ docker_pihole_host_dir_dnsmasqd }}:/etc/dnsmasq.d/"
 
-docker_pihole_timezone: "Europe/Amsterdam"
+docker_pihole_timezone: "{{ ansbile_nas_timezone }}"
 
 docker_pihole_dns_custom_hosts: []
 #  - name: somehost
@@ -27,6 +27,3 @@ docker_pihole_dns_custom_hosts: []
 
 docker_pihole_dns_custom_hosts_path: "{{ docker_pihole_host_dir_pihole }}custom_hosts.list"
 docker_pihole_dns_custom_hosts_dnsmasq_conf_path: "{{ docker_pihole_host_dir_dnsmasqd }}99-custom-hosts.conf"
-docker_pihole_dns_servers:
-  - "127.0.0.1"
-  - "1.1.1.1"

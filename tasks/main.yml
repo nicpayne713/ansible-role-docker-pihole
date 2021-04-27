@@ -13,19 +13,24 @@
     restart: yes
     restart_policy: unless-stopped
     networks_cli_compatible: yes
-    networks:
-      - name: "{{ docker_pihole_network | default('bridge') }}"
-        ipv4_address: "{{ docker_pihole_ipv4_address }}"
-    purge_networks: "{{ docker_pihole_purge_networks }}"
+    # networks:
+    #   - name: "{{ docker_pihole_network | default('bridge') }}"
+    #     ipv4_address: "{{ docker_pihole_ipv4_address }}"
+    # purge_networks: "{{ docker_pihole_purge_networks }}"
     volumes: "{{ docker_pihole_volumes }}"
     env:
       TZ: "{{ docker_pihole_timezone }}"
-      ServerIP: "{{ docker_pihole_ipv4_address }}"
+      ServerIP: "127.0.0.1"
       INTERFACE: "{{ docker_pihole_network_interface }}"
       WEBPASSWORD: "{{ __docker_pihole_admin_password }}"
+      PIHOLE_DNS_: 127.0.0.1#5335;1.1.1.1
+    ports:
+      - "5333:53/tcp"
+      - "5333:53/udp"
+      - "6777:67/udp"
+      - "{{ docker_pihole_web_port }}:80/tcp"
     capabilities: NET_ADMIN
-    dns_servers: "{{ docker_pihole_dns_servers }}"
 
 - name: Setup custom hosts
   include_tasks: custom_hosts.yml
-  when: docker_pihole_dns_custom_hosts | length > 0
+  when: docker_pihole_dns_custom_hosts | length > 
