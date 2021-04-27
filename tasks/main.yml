@@ -33,4 +33,4 @@
 
 - name: Setup custom hosts
   include_tasks: custom_hosts.yml
-  when: docker_pihole_dns_custom_hosts | length > 
+  when: docker_pihole_dns_custom_hosts | length > 0

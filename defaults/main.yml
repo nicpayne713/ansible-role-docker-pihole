@@ -7,9 +7,9 @@ docker_pihole_network: bridge
 docker_pihole_network_interface: "eth0"
 # docker_pihole_ipv4_address: 192.168.1.100
 # docker_pihole_purge_networks: yes
-
-docker_pihole_admin_password:
 docker_pihole_web_port: 8080
+docker_pihole_admin_password:
+docker_pihole_web_port: "{{ docker_pihole_web_port }}"
 docker_pihole_host_dir_dnsmasqd: /etc/dnsmasq.d/
 docker_pihole_host_dir_pihole: /etc/pihole/
 docker_pihole_volumes:
